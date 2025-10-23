@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-left">
+      <h1>Task Manager</h1>
+    </div>
+
+    <div class="top-right">
+      <div class="view-controls" id="viewControls">
+        <button id="btnToday" class="btn active">Today</button>
+        <button id="btnFuture" class="btn ghost">Future</button>
+        <button id="btnPast" class="btn ghost">Past</button>
+      </div>
+
+      <div class="action-controls" id="actionControls">
+        <input id="viewDate" type="date" class="date-picker hidden" />
+        <button id="openAddBtn" class="btn">+ Add Task</button>
+        <button id="clearAll" class="btn ghost">Clear All</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+    <div class="board" id="board">
+      <!-- columns rendered here -->
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Task</h2>
+      <form id="taskForm">
+        <input type="hidden" id="taskId">
+        <label>
+          Title
+          <input id="taskTitle" required maxlength="80" />
+        </label>
+        <label>
+          Description
+          <textarea id="taskDesc" rows="3" maxlength="500"></textarea>
+        </label>
+        <label>
+          Due date
+          <input id="taskDue" type="date" />
+        </label>
+        <label>
+          Priority
+          <select id="taskPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+
+        <div class="modal-actions">
+          <div class="form-field">
+            <label for="taskStatus">Add to Column:</label>
+            <select id="taskStatus" class="input">
+              <option value="todo">To Do</option>
+              <option value="inprogress">In Progress</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn">Save</button>
+          <button type="button" id="cancelBtn" class="btn ghost">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

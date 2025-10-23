@@ -1,0 +1,139 @@
+:root {
+  --bg: #0f1724;
+  --panel: #0b1220;
+  --muted: #94a3b8;
+  --accent: #7c3aed;
+  --card: #0e1621;
+  --danger: #ef4444;
+  --glass: rgba(255, 255, 255, 0.03);
+  --shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #061022);
+  color: #e6eef8;
+  padding: 18px;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.topbar h1 { margin: 0; font-size: 20px; }
+.btn {
+  background: var(--accent);
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+.btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.06); }
+.board-wrap { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+
+/* Board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  flex: 1;
+}
+.column {
+  background: var(--panel);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+.col-title { margin: 0 0 8px 0; font-size: 16px; color: var(--muted); }
+.drop-area {
+  flex: 1;
+  overflow: auto;
+  padding: 6px;
+  border-radius: 8px;
+}
+.card {
+  background: var(--card);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: grab;
+  box-shadow: 0 4px 10px rgba(2, 6, 23, 0.5);
+}
+.card.dragging { opacity: 0.6; border: 2px dashed rgba(255,255,255,0.08); }
+.card h4 { margin: 0 0 6px 0; font-size: 14px; }
+.card p { margin: 0; font-size: 13px; color: var(--muted); }
+.meta { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--muted); }
+.actions { display: flex; gap: 6px; margin-top: 8px; }
+.icon-btn { background: transparent; border: 0; color: var(--muted); cursor: pointer; padding: 6px; border-radius: 6px; }
+
+/* priority badges */
+.priority { padding: 4px 8px; border-radius: 999px; font-size: 12px; }
+.priority.low { background: rgba(34,197,94,0.12); color: #86efac; }
+.priority.medium { background: rgba(250,204,21,0.08); color: #facc15; }
+.priority.high { background: rgba(239,68,68,0.08); color: #f87171; }
+
+.empty { opacity: 0.5; text-align: center; padding: 20px; color: var(--muted); }
+
+/* Modal */
+.modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(2,6,23,0.6); z-index: 60; }
+.modal.hidden { display: none; }
+.modal-content { background: var(--panel); padding: 16px; border-radius: 12px; width: 320px; }
+.modal-content label { display: block; margin: 8px 0; font-size: 13px; }
+.modal-content input, .modal-content textarea, .modal-content select {
+  width: 100%; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.04); background: var(--glass); color: inherit;
+}
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+
+/* Panels (previous / future) */
+.panel {
+  background: var(--panel);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  min-height: 120px;
+  width: 320px;
+}
+.panel h3 { margin-top: 0; color: var(--muted); font-size: 15px; }
+.panel.hidden { display: none; }
+
+/* status badges in previous panel */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.status-complete { background: rgba(34,197,94,0.12); color: #86efac; }
+.status-incomplete { background: rgba(239,68,68,0.08); color: #f87171; }
+
+@media (max-width: 900px) {
+  .board { grid-template-columns: repeat(2, 1fr); }
+  .board-wrap { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .board { grid-template-columns: 1fr; }
+}
+
+/* Center columns nicely */
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.column {
+  flex: 1 1 300px;
+  max-width: 350px;
+}
+
+/* Optional: highlight drop area */
+.drop-area.over {
+  outline: 2px dashed rgba(255,255,255,0.1);
+  background-color: rgba(255,255,255,0.03);
+}
